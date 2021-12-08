@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Guessing Game | Devmountain Foundations</title>
+
+      <link
+        href="_static/pygments.css"
+        rel="stylesheet"
+        type="text/css"
+      />
+      <link href="_static/devmountain.css" rel="stylesheet" type="text/css" />
+          <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+          <link rel="stylesheet" type="text/css" href="_static/devmountain.css" />
+          <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+          <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+
+      <script src="_static/pdfobject.min.js"></script>
+      
+  </head>
+  <body>
+      <div id="handouts-container">
+        <header id="page-header">
+            <p id="project-title">Devmountain Foundations</p>
+            <p id="page-title">Guessing Game</p>
+              <p id="backlink">
+                <a href="/"> &laquo; Back to Homepage </a>
+              </p>
+        </header>
+
+        <nav id="page-toc"><ul>
+<li><a class="reference internal" href="#">Guessing Game</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#step-1-check-out-lab-materials">Step 1: Check Out Lab Materials</a></li>
+<li><a class="reference internal" href="#step-2-hello-world">Step 2: Hello World</a></li>
+<li><a class="reference internal" href="#step-3-build-out-guessing-game">Step 3: Build Out Guessing Game</a><ul>
+<li><a class="reference internal" href="#about-the-guessing-game">About the Guessing Game</a></li>
+<li><a class="reference internal" href="#greet-the-player">Greet the Player</a></li>
+<li><a class="reference internal" href="#get-the-player-s-name">Get the Player’s Name</a></li>
+<li><a class="reference internal" href="#choose-a-random-number">Choose a Random Number</a></li>
+<li><a class="reference internal" href="#keep-going">Keep Going!</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#step-4-check-for-faulty-user-input">Step 4: Check for Faulty User Input</a><ul>
+<li><a class="reference internal" href="#confirm-that-the-user-s-guess-falls-within-your-range">Confirm that the User’s Guess Falls Within Your Range</a></li>
+<li><a class="reference internal" href="#make-sure-the-user-s-guess-is-an-integer">Make Sure the User’s Guess is an Integer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#further-study">Further Study</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+
+        <main id="page-content">
+            <section class="section" id="guessing-game">
+<h1>Guessing Game</h1>
+<section class="section" id="introduction">
+<h2>Introduction</h2>
+<p>In this exercise you’ll write a command line application
+that allows users to play a “guess my number” game, but this time,
+in Java!</p>
+</section>
+<section class="section" id="setup">
+<h2>Setup</h2>
+<p>Download the materials for this exercise <a class="reference external" href="https://ed.devmountain.com/materials/exercises/guessing-game-java.zip">here</a>.</p>
+</section>
+<section class="section" id="step-1-check-out-lab-materials">
+<h2>Step 1: Check Out Lab Materials</h2>
+<p>If you ran <cite>ls</cite> after <cite>cd</cite>-ing into <cite>~/src/guessing-game</cite>, you already know
+that the folder contains one file — <cite>Game.java</cite>. Let’s get the lay of the land
+and see what it does.</p>
+<p>One way to get a feel for what a Java file does is to run it! You’ll always
+run code in your preferred command line using the <cite>javac</cite> and <cite>java</cite> commands:</p>
+<pre class="console literal-block"> $ <span class="cmd">javac Game.java</span>
+ $ <span class="cmd">java Game</span></pre>
+<p>…nothing happened! What gives?</p>
+<pre class="console literal-block">$ <span class="cmd">cat Game.java</span>
+/*
+
+A number-guessing game.
+
+<a href="#id1"><span class="problematic" id="id2">*</span></a>/
+
+public class Game {
+  public static void main(String[] args){
+    // Put your code here.
+  }
+
+}</pre>
+<p><em>Now</em> it makes sense that nothing happened when we tried to run <cite>Game</cite>.
+There isn’t anything exciting going on in this file.</p>
+</section>
+<section class="section" id="step-2-hello-world">
+<h2>Step 2: Hello World</h2>
+<p>In VS Code, add a print statement to <cite>Game.java</cite>. You can print whatever you
+want (you’ll remove this line of code later) but whatever you do, <strong>don’t save
+the file yet</strong>. Your code should look something like this:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Game</span> <span class="p">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">){</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We need to <strong>compile</strong> this class again, because the underlying sourcecode
+has changed. This is what you should see when you run the following commands.</p>
+<pre class="console literal-block"> $ <span class="cmd">javac Game.java</span>
+ $ <span class="cmd">java Game</span>
+Hello World</pre>
+</section>
+<section class="section" id="step-3-build-out-guessing-game">
+<h2>Step 3: Build Out Guessing Game</h2>
+<section class="section" id="about-the-guessing-game">
+<h3>About the Guessing Game</h3>
+<p>For the rest of this exercise, you’ll write a program in the <cite>Game.java</cite> file that
+plays the classic number guessing game. The game will work like this:</p>
+<ul class="simple">
+<li><p>The computer will choose a random number between 1–100 and ask the user to
+guess the number</p></li>
+<li><p>Once the user guesses, the computer will tell the user if their guess was too
+high or too low</p></li>
+<li><p>The game is over once the user guesses the computer’s number. When the game is
+over, the computer prints the total number of guesses the user made before getting
+the right answer.</p></li>
+</ul>
+<p>Here’s the terminal output for an example game:</p>
+<pre class="console literal-block">$ <span class="cmd">java Game</span>
+Howdy, what's your name?
+(type in your name) <span class="cmd">Jessica</span>
+Jessica, I'm thinking of a number between 1 and 100.
+Try to guess my number.
+Your guess? <span class="cmd">50</span>
+Your guess is too low, try again.
+Your guess? <span class="cmd">80</span>
+Your guess is too high, try again.
+Your guess? <span class="cmd">60</span>
+Your guess is too low, try again.
+Your guess? <span class="cmd">70</span>
+Your guess is too high, try again.
+Your guess? <span class="cmd">63</span>
+Your guess is too low, try again.
+Your guess? <span class="cmd">64</span>
+Your guess is too low, try again.
+Your guess? <span class="cmd">67</span>
+Your guess is too low, try again.
+Your guess? <span class="cmd">69</span>
+Your guess is too high, try again.
+Your guess? <span class="cmd">68</span>
+Well done, Jessica! You found my number in 9 tries!</pre>
+<p>Here’s a rough pseudocode outline of the program that gave this output:</p>
+<pre class="literal-block">greet player
+get player name
+choose random number between 1 and 100
+<em>repeat forever:</em>
+    get guess
+    if guess is incorrect:
+        give hint
+        increase number of guesses
+    else:
+        congratulate player</pre>
+</section>
+<section class="section" id="greet-the-player">
+<h3>Greet the Player</h3>
+<p>The first feature to implement is the greeting:</p>
+<ul class="simple">
+<li><p>In VS Code, add code to <cite>Game.java</cite> that displays a greeting to the player</p></li>
+<li><p>Since you’ve added new code, re-compile and run it again to test that it works</p></li>
+<li><p>It’s a good time to <cite>git commit</cite> 💾</p></li>
+</ul>
+</section>
+<section class="section" id="get-the-player-s-name">
+<h3>Get the Player’s Name</h3>
+<p>After “greet player,” our pseudocode outline says “get player name”.</p>
+<ul class="simple">
+<li><p>Write code in <cite>Game.java</cite> that get the player’s name and save it to a variable</p></li>
+<li><p>Run your code to test it. Remember to re-compile your code before running, with <code class="docutils literal notranslate"><span class="pre">javac</span></code>.</p></li>
+<li><p>Once everything works, make another commit.</p></li>
+</ul>
+<p>The next thing you’ll do is choose a random number.</p>
+</section>
+<section class="section" id="choose-a-random-number">
+<h3>Choose a Random Number</h3>
+<p>Java comes with a <cite>Random</cite> module that contains functions for generating
+random numbers. To access the code in a module, all you have to do is import
+it. You can put <cite>import</cite> statements at the top of your file like this:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">Game.java</span></div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<p>To import any module, all you have to do is write <code class="docutils literal notranslate"><span class="pre">import</span></code> followed by the
+name of the module. After that, you can use any function included in the module
+like so:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// create an instance of the Random object</span>
+<span class="n">Random</span> <span class="n">rand</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="p">();</span>
+
+<span class="c1">// call method nextInt and pass in upper range bound</span>
+<span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="n">rand</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Now that you know how to import functions from modules, check out the official
+docs on the <cite>Random</cite> library here: <a class="reference external" href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Random.html" target="_blank">JDK 16 Documentation: Random</a>.</p>
+</section>
+<section class="section" id="keep-going">
+<h3>Keep Going!</h3>
+<p>Keep adding code to <cite>Game.java</cite>!</p>
+<p>Along the way, you may need to learn about
+<a class="reference external" href="https://www.tutorialspoint.com/read-integers-from-console-in-java" target="_blank">how to capture an integer from the user</a>.</p>
+<p>While we do recommend using the <cite>Scanner.nextInt()</cite> method, you could also
+capture user input as a string, and cast the string into an integer.
+This is closer how we would do this in Python. If you want to learn
+more about how to do this, you can read the
+<a class="reference external" href="https://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html" target="_blank">docs</a>
+for <cite>Integer.parseInt()</cite> or read this
+<a class="reference external" href="https://www.javatpoint.com/java-string-to-int" target="_blank">short tutorial</a>.</p>
+<p>Notably, in Java, <code class="docutils literal notranslate"><span class="pre">break</span></code> and <code class="docutils literal notranslate"><span class="pre">continue</span></code> work the same as they do in Python, but feel
+free to do some googling to see some examples of these statements in Java.</p>
+<p>Once you have a game that…</p>
+<ul class="simple">
+<li><p>Asks for the user’s name</p></li>
+<li><p>Greets the user and prompts them to guess a number</p></li>
+<li><p>Cycles through until the user guesses the right number</p></li>
+<li><p>Ends when the user guesses the right number and displays the number of guesses
+that the user made</p></li>
+</ul>
+<p>… feel free to move on to the next sections.</p>
+</section>
+</section>
+<section class="section" id="step-4-check-for-faulty-user-input">
+<h2>Step 4: Check for Faulty User Input</h2>
+<section class="section" id="confirm-that-the-user-s-guess-falls-within-your-range">
+<h3>Confirm that the User’s Guess Falls Within Your Range</h3>
+<p>If the user inputs a number that isn’t between 1-100 as requested,
+mock them for their crimes and ask them to enter a valid number.</p>
+</section>
+<section class="section" id="make-sure-the-user-s-guess-is-an-integer">
+<h3>Make Sure the User’s Guess is an Integer</h3>
+<p>If the user inputs something that is not an integer, mock them for their crimes
+and ask them to enter a valid integer. If you’re not sure where to start with
+this feature, check the hint below.</p>
+<div class="admonition hint">
+<p class="admonition-title">Validating user input</p>
+<details class="admonition-body"><summary></summary><div class="admonition-body docutils container">
+<p>A good way forward is to learn what happens when you <em>don’t</em> enter a number.
+Then, learn about Java’s <cite>try</cite> and <cite>catch</cite> statements. They are very
+similar to Python’s <cite>try</cite> and <cite>except</cite> statements.</p>
+<p>Notably, if you want to use <code class="docutils literal notranslate"><span class="pre">continue</span></code> in the <cite>catch</cite> block to progress to
+another iteration after the bad input, you need to add an additional line
+to your <cite>catch</cite> block to progress your <cite>Scanner</cite> past the bad input as well.</p>
+<p>So, your catch block should contain the following lines:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">bad_input</span> <span class="o">=</span> <span class="n">input</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>   <span class="c1">// need to progress past bad input</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;That&#39;s not an integer, try again&quot;</span><span class="p">);</span>
+<span class="k">continue</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</details></div>
+</section>
+</section>
+<section class="section" id="further-study">
+<h2>Further Study</h2>
+<p>If you have more time, you can <a class="reference external" href="further-study">click here to continue to the Further Study</a></p>
+</section>
+</section>
+
+        </main>
+
+        <footer id="page-footer">
+            <p>&copy; 2021 Devmountain</p>
+        </footer>
+      </div>
+
+      <script src="_static/main.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+  </body>
+</html>

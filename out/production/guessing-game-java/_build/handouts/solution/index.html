@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Guessing Game: Solution | Devmountain Foundations</title>
+
+      <link
+        href="../_static/pygments.css"
+        rel="stylesheet"
+        type="text/css"
+      />
+      <link href="../_static/devmountain.css" rel="stylesheet" type="text/css" />
+          <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+          <link rel="stylesheet" type="text/css" href="../_static/devmountain.css" />
+          <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+          <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+
+      <script src="../_static/pdfobject.min.js"></script>
+      
+  </head>
+  <body>
+      <div id="handouts-container">
+        <header id="page-header">
+            <p id="project-title">Devmountain Foundations</p>
+            <p id="page-title">Guessing Game: Solution</p>
+              <p id="backlink">
+                <a href="/"> &laquo; Back to Homepage </a>
+              </p>
+        </header>
+
+        <nav id="page-toc"><ul>
+<li><a class="reference internal" href="#">Guessing Game: Solution</a><ul>
+<li><a class="reference internal" href="#solution">Solution</a><ul>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+
+        <main id="page-content">
+            <section class="section" id="guessing-game-solution">
+<h1>Guessing Game: Solution</h1>
+<section class="section" id="solution">
+<h2>Solution</h2>
+<p>Here’s a basic version:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">solution/Game.java</span></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span>
+
+<span class="n">A</span> <span class="n">number</span><span class="o">-</span><span class="n">guessing</span> <span class="n">game</span><span class="o">.</span>
+
+<span class="o">*/</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="p">;</span>  
+<span class="kn">import</span> <span class="nn">java.util.InputMismatchException</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="k">class</span> <span class="nc">Game</span> <span class="p">{</span>
+  <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">){</span>
+    <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Howdy, what&#39;s your name?&quot;</span><span class="p">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;(type in your name) &quot;</span><span class="p">);</span>
+
+    <span class="n">Scanner</span> <span class="nb">input</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="o">.</span><span class="ow">in</span><span class="p">);</span>
+
+    <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">nextLine</span><span class="p">();</span>
+
+    <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; I&#39;m thinking of a number between 1 and 100.&quot;</span><span class="p">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Can you guess what the number is?&quot;</span><span class="p">);</span>
+
+
+    <span class="n">Random</span> <span class="n">rand</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Random</span><span class="p">();</span>
+    <span class="nb">int</span> <span class="n">number</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">nextInt</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    <span class="nb">int</span> <span class="n">tries</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;The number is &quot;</span><span class="o">+</span><span class="n">number</span><span class="p">);</span>
+
+    <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; I&#39;m thinking of a number between 1 and 100.&quot;</span><span class="p">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Can you guess what the number is?&quot;</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">guess</span><span class="p">;</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="n">guess</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">nextInt</span><span class="p">();</span>
+        <span class="p">}</span> <span class="n">catch</span><span class="p">(</span><span class="n">InputMismatchException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">String</span> <span class="n">bad_input</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">next</span><span class="p">();</span>   <span class="o">//</span> <span class="n">need</span> <span class="n">to</span> <span class="n">progress</span> <span class="n">past</span> <span class="n">bad</span> <span class="nb">input</span>
+            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;That&#39;s not an integer, try again&quot;</span><span class="p">);</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>        
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">guess</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">guess</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">){</span>
+            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">guess</span> <span class="o">+</span> <span class="s2">&quot; is not a valid number, try again&quot;</span><span class="p">);</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">tries</span> <span class="o">=</span> <span class="n">tries</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">guess</span> <span class="o">&lt;</span> <span class="n">number</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Your guess is too low, try again.&quot;</span><span class="p">);</span>
+        
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">guess</span> <span class="o">&gt;</span> <span class="n">number</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Your guess is too high, try again.&quot;</span><span class="p">);</span>    
+        
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Well done &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;You found my number in &quot;</span> <span class="o">+</span> <span class="n">tries</span> <span class="o">+</span> <span class="s2">&quot; tries!&quot;</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+  <span class="p">}</span>
+
+<span class="p">}</span>
+
+
+
+</pre></div>
+</div>
+</div>
+<section class="section" id="notes">
+<h3>Notes</h3>
+<ul class="simple">
+<li><p>Instead of using <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">(true)</span></code> and a <cite>break</cite> statement, you can write
+<code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">(guess</span> <span class="pre">!=</span> <span class="pre">number)</span></code> which would break automatically when the user
+guessed correctly. This requires initializing <cite>guess</cite> outside of our while
+loop as something that would never accidentally be the random number. You
+could use something like <cite>-1</cite> or <cite>None</cite> for that value.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </main>
+
+        <footer id="page-footer">
+            <p>&copy; 2021 Devmountain</p>
+        </footer>
+      </div>
+
+      <script src="../_static/main.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+  </body>
+</html>
