@@ -65,7 +65,7 @@ public class Game {
       System.out.println("Ok, here are the rules. I guess. You tell me 'higher', 'lower', or 'you won' and eventually I will read your mind.");
         Random rand = new Random();
         int newGuess = rand.nextInt(100) + 1;
-        int attempts = 0;
+        int attempts = 1;
         int max = 100;
         int min = 1;
         boolean correct = false;
