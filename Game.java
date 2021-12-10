@@ -13,7 +13,7 @@ public class Game {
     System.out.println("hello my gamer nerds. Please identify yourself or risk annihilation.");
     String userName = input.nextLine();
     System.out.println("Well it's about time you showed up, " + userName);
-    System.out.print("Wanna play a game? All you have to do is give me a number between 1 and 100... ");
+    System.out.print("Wanna guess what number I'm thinking? It's between 1 & 100... ");
     boolean nextGame = true;
     int lowestTries = 100;
     do {
@@ -74,6 +74,7 @@ public class Game {
         if(res.equals("you won")){
           System.out.println("NICE");
         } else while (!correct) {
+          attempts++;
           String clue = input.nextLine();
 //            newGuess = rand.nextInt(100);
           switch (clue) {
@@ -101,7 +102,6 @@ public class Game {
             System.out.println("I should have had it by now... I give up!");
             break;
           }
-          attempts++;
         }
     } else if(newGame == 0){
       System.out.println("Thanks for playing! I hope you had fun. I sure did.");
